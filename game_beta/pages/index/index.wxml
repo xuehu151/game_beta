@@ -1,0 +1,109 @@
+<!--index.wxml-->
+<view class="container">
+    <!-- 消息广播 -->
+    <view class='broadcast' wx:if='{{messageHide}}'>
+        <view class='messageBox'>
+            <image src='../../img/guangbo.png' class='guangbo'></image>
+            <swiper class='messageTitle' indicator-dots autoplay='paly' vertical='ture' circular='true' interval="2000" style='height'>
+                <block wx:for="{{message}}" wx:key="key">
+                    <swiper-item>
+                        <view class="title">系统广播
+                            <text decode="{{true}}" space="{{true}}">&nbsp;</text>:
+                        </view>
+                        <view class='money'>
+                            <text decode="{{true}}" space="{{true}}">&nbsp;</text>{{item}}
+                        </view>
+                    </swiper-item>
+                </block>
+            </swiper>
+            <image src='../../img/close.png' class='close' bindtap='messageButton'></image>
+        </view>
+    </view>
+    <!-- 赛前、滚球、我的 -->
+    <view class='tabs'>
+        <view 
+            class="tabs-list {{currentTab==item.tbsIndex ? 'active' : ''}}" 
+            data-current='{{item.tbsIndex}}' 
+            bindtap='swichtab' 
+            wx:for='{{tbsTeamWarp}}'
+            wx:key='key'>
+            {{item.textTitle}}
+        </view>
+    </view>
+    <!-- 赛前、滚球、我的所对应页面 -->
+    <swiper current='{{currentTab}}' class="swiper-box" style='height:{{winHeight-messageHeight-80}}rpx' bindchange="listenSwiper">
+        <swiper-item>
+            <!-- 二级菜单 -->
+            <view class='maintab'>
+                <view class='main'>
+                    <view 
+                        class="main-list {{mainTab==item.classifyIndex ? 'mainActive' : ''}}" 
+                        data-main='{{item.classifyIndex}}' 
+                        bindtap='swichmintab' 
+                        wx:for="{{classifyTbsTeam}}"
+                        wx:key="key">
+                            {{item.classifyTextTitle}}
+                         <view 
+                            class="num {{mainTab==2 ? 'innum' : ''}}" 
+                            wx:if="{{item.badge!=''}}">
+                             {{item.badge}}
+                         </view>
+                    </view>
+                </view>
+                <image class='filtrate' src='../../img/shaixuan.png'></image>
+                <image class='explain' src='../../img/wenhao.png'></image>
+            </view>
+            <!-- 二级菜单 二级选项卡 -->
+            <swiper 
+                current="{{mainTab}}" 
+                class="swiper-twobox" 
+                style='height:{{winHeight-messageHeight-162}}rpx'
+                bindchange="classifyListenSwiper">
+                <swiper-item>
+                    <!-- 按時間 -->
+                    <view class='time'>
+                        <view class='time-bar'>
+                            <block wx:for='{{timelist}}' wx:key="key">
+                                <view class="timelist {{vertical==item.index ? 'col' : ''}}" data-id='{{index}}' bindtap='leftTimebtn'>
+                                    <view class='week'>{{item.weak}}({{item.num}})</view>
+                                    <view class='data'>{{item.ym}}</view>
+                                </view>
+                            </block>
+                        </view>
+                        <view class='time-nav'>
+                            <block wx:for='{{10}}' wx:key="key">
+                                <view class='nav-list' >
+                                    <view class='match-time'>
+                                        <picker class='top'>
+                                            <text class='league_name'>亚青u23</text>
+                                            <text class='date'>16:00|</text>
+                                            <text class='source_way'>滚球</text>
+                                        </picker>
+                                        <picker class='bottom'>
+                                            fddsfhsf
+                                        </picker>
+                                    </view>
+                                </view>
+                            </block >
+                        </view>
+                    </view>
+                </swiper-item>
+                <!-- 按联赛   -->
+                <swiper-item>
+                    <view>我是按联赛</view>
+                </swiper-item>
+                <!-- 我的关注 -->
+                <swiper-item>
+                    <view>我是我的关注</view>
+                </swiper-item>
+            </swiper>
+        </swiper-item>
+
+        <swiper-item>
+            <view>我是滚球</view>
+        </swiper-item>
+        <swiper-item>
+            <view>我是我的</view>
+        </swiper-item>
+    </swiper>
+</view>

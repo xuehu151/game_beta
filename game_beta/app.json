@@ -1,0 +1,12 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/details/details"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#00c853",
+        "navigationBarTitleText": "足球竞猜",
+        "navigationBarTextStyle": "white"
+    }
+}
